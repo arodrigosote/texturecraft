@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=TextureCraft
+Name=ICASYS Texturas
 GenericName=3D Texture Painter
 Comment=Paint PBR textures directly on 3D meshes
 Exec=texturecraft %F

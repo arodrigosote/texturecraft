@@ -283,7 +283,7 @@ pub(crate) fn shader(app: &mut TextureCraftApp, ui: &mut Ui) {
     let mut display = app.session.doc.project.display.clone();
     let before = display.clone();
 
-    let model_name = |spec_gloss: bool| if spec_gloss { tr("TextureCraft PBR - Specular Glossiness") } else { tr("TextureCraft PBR - Metallic Roughness") };
+    let model_name = |spec_gloss: bool| if spec_gloss { tr("ICASYS Texturas PBR - Specular Glossiness") } else { tr("ICASYS Texturas PBR - Metallic Roughness") };
     let channels = if display.spec_gloss {
         tr("Base color is the diffuse color, Specular the F0 color and Glossiness 1 - roughness (add these channels in the texture set settings).")
     } else {
@@ -404,7 +404,7 @@ fn start(app: &mut TextureCraftApp, ctx: &egui::Context) {
     let tokens = Tokens::get(ctx);
     let mut open = true;
     let mut action = None;
-    dialog("start", "TextureCraft", &mut open).min_width(380.0).show(ctx, |ui| {
+    dialog("start", "ICASYS Texturas", &mut open).min_width(380.0).show(ctx, |ui| {
         ui.horizontal(|ui| {
             if ui.add(primary_button(ui, tr("New project..."))).clicked() {
                 action = Some(Start::Menu("ui.newProject"));
@@ -653,7 +653,7 @@ fn settings(app: &mut TextureCraftApp, ctx: &egui::Context) {
             {
                 ui.label(tr("Title bar"));
                 ui.checkbox(&mut p.system_title_bar, tr("System title bar (applies on restart)"))
-                    .on_hover_text(tr("Use the operating system's window frame and buttons instead of TextureCraft's own title bar"));
+                    .on_hover_text(tr("Use the operating system's window frame and buttons instead of ICASYS Texturas' own title bar"));
                 ui.end_row();
             }
             ui.label(tr("Start window"));
@@ -791,18 +791,18 @@ fn export_mesh(app: &mut TextureCraftApp, ctx: &egui::Context) {
 fn about(app: &mut TextureCraftApp, ctx: &egui::Context) {
     let tk = Tokens::get(ctx);
     let mut open = app.ui.windows.about;
-    dialog("about", tr("About TextureCraft"), &mut open).show(ctx, |ui| {
+    dialog("about", tr("About ICASYS Texturas"), &mut open).show(ctx, |ui| {
         ui.vertical_centered(|ui| {
-            ui.label(RichText::new("TextureCraft").size(22.0).strong().color(tk.text_strong));
+            ui.label(RichText::new("ICASYS Texturas").size(22.0).strong().color(tk.text_strong));
             ui.label(trf("Version {version}", &[("version", &texturecraft_engine::VERSION)]));
             ui.add_space(6.0);
             ui.label(tr("3D texture painting: layers, masks, smart materials, mesh map baking and export."));
             ui.label(tr("Free and open source (MIT OR Apache-2.0), written in Rust."));
             ui.add_space(6.0);
-            ui.hyperlink_to(tr("Join the ArtCraft community on Discord"), "https://discord.gg/artcraft");
-            ui.hyperlink_to("getartcraft.com/apps/texturecraft", "https://getartcraft.com/apps/texturecraft");
+            ui.hyperlink_to(tr("ICASYS Community"), "https://icasys.mx");
+            ui.hyperlink_to("icasys.mx", "https://icasys.mx");
             ui.add_space(6.0);
-            ui.label(RichText::new(tr("Made by the ArtCraft team and community.")).color(tk.text_dim));
+            ui.label(RichText::new(tr("ICASYS edition, based on TextureCraft by the ArtCraft team.")).color(tk.text_dim));
         });
     });
     app.ui.windows.about = open;
@@ -884,7 +884,7 @@ pub fn layout_file(app: &mut TextureCraftApp, _save: bool) {
 pub fn file_action(app: &mut TextureCraftApp, _ctx: &egui::Context, id: &str) -> bool {
     match id {
         "file.open" => {
-            app.ask_file(FileDialog::open().filter(tr("TextureCraft project or mesh"), crate::web_files::OPEN_EXTS), Bound::App, |app, paths| {
+            app.ask_file(FileDialog::open().filter(tr("ICASYS Texturas project or mesh"), crate::web_files::OPEN_EXTS), Bound::App, |app, paths| {
                 if let Some(p) = paths.first() {
                     open_path(app, &p.display().to_string());
                 }
@@ -987,7 +987,7 @@ pub fn file_action(app: &mut TextureCraftApp, _ctx: &egui::Context, id: &str) ->
 #[track_caller]
 fn ask_save_project(app: &mut TextureCraftApp, cmd: &'static str) {
     let name = crate::web_files::project_file_name(app);
-    let dialog = FileDialog::save().filter(tr("TextureCraft project"), &[texturecraft_engine::core::PROJECT_EXT]).file_name(name);
+    let dialog = FileDialog::save().filter(tr("ICASYS Texturas project"), &[texturecraft_engine::core::PROJECT_EXT]).file_name(name);
     // Save a Copy leaves the project unsaved, so it never answers the unsaved-changes prompt.
     let for_prompt = app.saving_for_prompt && cmd == "file.saveAs";
     let asked = app.ask_file(dialog, Bound::Project, move |app, paths| {

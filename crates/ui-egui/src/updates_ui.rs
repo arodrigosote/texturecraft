@@ -15,7 +15,7 @@ pub(crate) struct Runtime {
 
 impl Default for Runtime {
     fn default() -> Self {
-        Self { updater: Updater::new(&crate::UPDATE_APP, env!("CARGO_PKG_VERSION")), startup_check: false, check_requested: false }
+        Self { updater: Updater::new(&crate::UPDATE_APP, env!("CARGO_PKG_VERSION")).with_source(::std::sync::Arc::new(|| -> ::std::result::Result<::std::option::Option<::craft_update::Release>, ::std::string::String> { Err(::std::string::String::from("ICASYS apps are updated by ICASYS: https://icasys.mx / Las apps de ICASYS se actualizan desde ICASYS: https://icasys.mx")) })), startup_check: false, check_requested: false }
     }
 }
 
@@ -125,7 +125,7 @@ mod tests {
         session.modified = modified;
         let mut h = Harness::builder().with_size(egui::vec2(1600.0, 960.0)).build_eframe(|cc| TextureCraftApp::new(cc, session));
         h.state_mut().updates_rt.updater =
-            Updater::new(&crate::UPDATE_APP, "0.0.1").with_source(ask).with_paths(Paths::under(&root)).with_pins_path(root.join("pins.json"));
+            Updater::new(&crate::UPDATE_APP, "0.0.1").with_source(::std::sync::Arc::new(|| -> ::std::result::Result<::std::option::Option<::craft_update::Release>, ::std::string::String> { Err(::std::string::String::from("ICASYS apps are updated by ICASYS: https://icasys.mx / Las apps de ICASYS se actualizan desde ICASYS: https://icasys.mx")) })).with_source(ask).with_paths(Paths::under(&root)).with_pins_path(root.join("pins.json"));
         h.state_mut().ui.windows.start = false;
         h.run_steps(2);
         h
@@ -136,7 +136,7 @@ mod tests {
             tag: "v99.0.0".into(),
             version: craft_update::parse_version("99.0.0"),
             name: "TextureCraft 99.0.0".into(),
-            html_url: "https://github.com/storytold/texturecraft/releases/tag/v99.0.0".into(),
+            html_url: "https://github.com/arodrigosote/texturecraft/releases/tag/v99.0.0".into(),
             ..Default::default()
         };
         h.state_mut().updates_rt.updater.offer(release);
@@ -320,6 +320,6 @@ mod tests {
         assert_eq!(picked(Os::Linux, Arch::X64, PackageKind::AppImage).as_deref(), Some(names[3]));
         assert_eq!(picked(Os::Linux, Arch::X64, PackageKind::TarGz).as_deref(), Some(names[4]));
         assert_eq!(crate::UPDATE_APP.bundle_id(), "ai.storyteller.texturecraft");
-        assert_eq!(crate::UPDATE_APP.repo, "storytold/texturecraft");
+        assert_eq!(crate::UPDATE_APP.repo, "arodrigosote/texturecraft");
     }
 }

@@ -29,9 +29,9 @@ fn version() -> String {
     let short = sha.get(..7).unwrap_or(sha);
     let date = env!("TEXTURECRAFT_BUILD_DATE");
     match (short.is_empty(), date.is_empty()) {
-        (true, true) => format!("TextureCraft {}", texturecraft_engine::VERSION),
-        (true, false) => format!("TextureCraft {} ({date})", texturecraft_engine::VERSION),
-        _ => format!("TextureCraft {} ({short} {date})", texturecraft_engine::VERSION),
+        (true, true) => format!("ICASYS Texturas {}", texturecraft_engine::VERSION),
+        (true, false) => format!("ICASYS Texturas {} ({date})", texturecraft_engine::VERSION),
+        _ => format!("ICASYS Texturas {} ({short} {date})", texturecraft_engine::VERSION),
     }
 }
 
@@ -209,7 +209,7 @@ fn main() {
     prefs.apply_resource_limits();
     let session = initial_session(&args);
     let title_bar = TitleBar::decide(prefs.system_title_bar);
-    let mut viewport = egui::ViewportBuilder::default().with_title(APP_NAME).with_inner_size(DEFAULT_SIZE).with_min_inner_size(MIN_SIZE);
+    let mut viewport = egui::ViewportBuilder::default().with_title("ICASYS Texturas").with_inner_size(DEFAULT_SIZE).with_min_inner_size(MIN_SIZE);
     if let Some(i) = icon() {
         viewport = viewport.with_icon(i);
     }
@@ -232,7 +232,7 @@ fn main() {
             }
             // winit's Quit ends the process without asking; this menu's asks like the close button.
             #[cfg(target_os = "macos")]
-            if let Err(e) = craft_menu::mac::install_app_menu(&cc.egui_ctx, APP_NAME) {
+            if let Err(e) = craft_menu::mac::install_app_menu(&cc.egui_ctx, "ICASYS Texturas") {
                 log::warn!("the app menu could not be installed: {e}");
             }
             let window_frame = window_frame::service(cc, matches!(title_bar, TitleBar::App(_)));
@@ -280,8 +280,8 @@ fn fatal(msg: &str, dialog: bool) {
         let saved = log.map(|f| format!("\n\n{}", trf("Details saved to {file}", &[("file", &f.display())]))).unwrap_or_default();
         rfd::MessageDialog::new()
             .set_level(rfd::MessageLevel::Error)
-            .set_title(APP_NAME)
-            .set_description(format!("{}\n\n{msg}{saved}", tr("TextureCraft had to close:")))
+            .set_title("ICASYS Texturas")
+            .set_description(format!("{}\n\n{msg}{saved}", tr("ICASYS Texturas had to close:")))
             .set_buttons(rfd::MessageButtons::Ok)
             .show();
     }

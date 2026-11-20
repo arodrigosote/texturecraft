@@ -1787,7 +1787,7 @@ fn fill_properties(app: &mut TextureCraftApp, ui: &mut Ui, layer: &Layer) {
 fn link_properties(app: &mut TextureCraftApp, ui: &mut Ui, layer: LayerId, link: &MaterialLink) {
     let tk = Tokens::get(ui.ctx());
     let base = json!({"layer": layer.0, "cook": false});
-    ui.label(caption(tr("MaterialCraft material")));
+    ui.label(caption(tr("ICASYS Materiales material")));
     ui.horizontal(|ui| {
         ui.label(RichText::new(&link.name).strong());
         ui.label(RichText::new(trf("Cooked at {size} px", &[("size", &link.size)])).size(10.0).color(tk.text_dim));
@@ -1820,14 +1820,14 @@ fn link_properties(app: &mut TextureCraftApp, ui: &mut Ui, layer: LayerId, link:
         }
     });
     if !editable {
-        ui.label(RichText::new(tr("Parameters change in the desktop app, with MaterialCraft installed")).size(10.0).color(tk.text_dim));
+        ui.label(RichText::new(tr("Parameters change in the desktop app, with ICASYS Materiales installed")).size(10.0).color(tk.text_dim));
     }
     #[cfg(not(target_arch = "wasm32"))]
     ui.horizontal(|ui| {
         if ui.button(tr("Re-cook")).clicked() {
             app.cook_link(layer);
         }
-        if ui.button(tr("Open in MaterialCraft")).clicked() {
+        if ui.button(tr("Open in ICASYS Materiales")).clicked() {
             let path = std::env::temp_dir().join(format!("{}.mcraft", texturecraft_engine::formats::export::sanitize_file_stem(&link.name)));
             let opened = app
                 .session
@@ -1835,7 +1835,7 @@ fn link_properties(app: &mut TextureCraftApp, ui: &mut Ui, layer: LayerId, link:
                 .and_then(|b| std::fs::write(&path, b.as_slice()).map_err(|e| texturecraft_engine::EngineError::Other(e.to_string())))
                 .and_then(|()| texturecraft_engine::link_cmds::open_in_materialcraft(&path));
             match opened {
-                Ok(()) => app.toast(tr("Opened in MaterialCraft: use File > Send to TextureCraft there to bring your changes back"), false),
+                Ok(()) => app.toast(tr("Opened in ICASYS Materiales: use File > Send to ICASYS Texturas there to bring your changes back"), false),
                 Err(e) => app.toast(e.to_string(), true),
             }
         }

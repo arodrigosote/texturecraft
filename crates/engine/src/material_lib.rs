@@ -25,7 +25,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Add smart material from file",
             [],
             None,
-            "{path: .tcmat smart material, .mcmat MaterialCraft material or .mcraft package, above?: layer id, inside?: bool, index?: n} — above the selection by default, or placed like material.apply",
+            "{path: .tcmat smart material, .mcmat ICASYS Materiales material or .mcraft package, above?: layer id, inside?: bool, index?: n} — above the selection by default, or placed like material.apply",
             always,
             load
         ),

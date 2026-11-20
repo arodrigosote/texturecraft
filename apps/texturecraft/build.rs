@@ -61,12 +61,12 @@ fn today() -> Option<String> {
 
 fn windows_resources() {
     let name = std::env::var("CARGO_PKG_NAME").unwrap_or_else(|_| "texturecraft".into());
-    let description = if name.ends_with("-cli") { "TextureCraft command-line tool" } else { "TextureCraft 3D texture painter" };
+    let description = if name.ends_with("-cli") { "ICASYS Texturas command-line tool" } else { "ICASYS Texturas" };
     let mut res = winresource::WindowsResource::new();
     res.set_icon(ICON)
-        .set("ProductName", "TextureCraft")
+        .set("ProductName", "ICASYS Texturas")
         .set("FileDescription", description)
-        .set("CompanyName", "Learning Machines LLC")
+        .set("CompanyName", "ICASYS")
         .set("LegalCopyright", "Copyright (c) the TextureCraft contributors. MIT OR Apache-2.0.")
         .set("OriginalFilename", &format!("{name}.exe"))
         .set("InternalName", &name);

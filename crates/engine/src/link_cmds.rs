@@ -17,7 +17,7 @@ use crate::materials::Place;
 use crate::{EngineError, Result, Session, cmd};
 
 /// The undo label of parameter edits and re-cooks (a re-cook merges into the edit before it).
-const EDIT: &str = "Edit MaterialCraft material";
+const EDIT: &str = "Edit ICASYS Materiales material";
 
 pub fn specs() -> Vec<CommandSpec> {
     vec![
@@ -26,7 +26,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Set material parameter",
             [],
             None,
-            "{layer?, id, value (number, [..], bool, \"#rrggbb\" or {t, v}), cook?: true} — sets an exposed input of a MaterialCraft material layer and re-cooks its maps (cook: false only stores the value)",
+            "{layer?, id, value (number, [..], bool, \"#rrggbb\" or {t, v}), cook?: true} — sets an exposed input of an ICASYS Materiales material layer and re-cooks its maps (cook: false only stores the value)",
             has_layer,
             set
         ),
@@ -35,16 +35,16 @@ pub fn specs() -> Vec<CommandSpec> {
             "Apply material preset",
             [],
             None,
-            "{layer?, name, cook?: true} — applies a preset of a MaterialCraft material layer",
+            "{layer?, name, cook?: true} — applies a preset of an ICASYS Materiales material layer",
             has_layer,
             preset
         ),
         cmd!(
             "material.link.cook",
-            "Re-cook MaterialCraft material",
+            "Re-cook ICASYS Materiales material",
             [],
             None,
-            "{layer?} — re-cooks a MaterialCraft material layer at its texture set's resolution with the set's baked mesh maps",
+            "{layer?} — re-cooks an ICASYS Materiales material layer at its texture set's resolution with the set's baked mesh maps",
             has_layer,
             |s, p| {
                 let id = layer_param(s, "material.link.cook", p)?;
@@ -53,10 +53,10 @@ pub fn specs() -> Vec<CommandSpec> {
         ),
         cmd!(
             "material.link.saveSource",
-            "Save MaterialCraft package",
+            "Save ICASYS Materiales package",
             [],
             None,
-            "{layer?, path} — writes the MaterialCraft package (.mcraft) behind a material layer, to open in MaterialCraft",
+            "{layer?, path} — writes the ICASYS Materiales package (.mcraft) behind a material layer, to open in ICASYS Materiales",
             has_layer,
             save_source
         ),
@@ -67,7 +67,7 @@ pub fn specs() -> Vec<CommandSpec> {
 fn link_of(s: &Session, cmd: &str, id: LayerId) -> Result<MaterialLink> {
     match &s.doc.project.layer(id)?.kind {
         LayerKind::Fill(Fill { link: Some(link), .. }) => Ok(link.as_ref().clone()),
-        _ => Err(bad(cmd, format!("layer {} is not a MaterialCraft material", id.0))),
+        _ => Err(bad(cmd, format!("layer {} is not an ICASYS Materiales material", id.0))),
     }
 }
 
@@ -232,7 +232,7 @@ fn quiet(program: &std::path::Path) -> std::process::Command {
 pub fn open_in_materialcraft(package: &std::path::Path) -> Result<()> {
     let app = materialcraft_tool("materialcraft", "MATERIALCRAFT");
     quiet(&app).arg(package).spawn().map(drop).map_err(|e| {
-        EngineError::Other(format!("MaterialCraft ({}) did not start: {e}. Install MaterialCraft next to TextureCraft or set MATERIALCRAFT", app.display()))
+        EngineError::Other(format!("ICASYS Materiales ({}) did not start: {e}. Install ICASYS Materiales next to ICASYS Texturas or set MATERIALCRAFT", app.display()))
     })
 }
 
@@ -262,12 +262,12 @@ impl LinkJob {
             let cli = materialcraft_tool("materialcraft-cli", "MATERIALCRAFT_CLI");
             let run = quiet(&cli).arg("run").arg(&src).arg("file.exportMaterial").arg(params.to_string()).output().map_err(|e| {
                 other(format!(
-                    "MaterialCraft's command line ({}) did not start: {e}. Install MaterialCraft next to TextureCraft or set MATERIALCRAFT_CLI",
+                    "ICASYS Materiales' command line ({}) did not start: {e}. Install ICASYS Materiales next to ICASYS Texturas or set MATERIALCRAFT_CLI",
                     cli.display()
                 ))
             })?;
             if !run.status.success() {
-                return Err(other(format!("MaterialCraft could not cook the material: {}", String::from_utf8_lossy(&run.stderr).trim())));
+                return Err(other(format!("ICASYS Materiales could not cook the material: {}", String::from_utf8_lossy(&run.stderr).trim())));
             }
             std::fs::read(&out).map_err(|e| other(format!("{}: {e}", out.display())))
         })();
@@ -277,7 +277,7 @@ impl LinkJob {
 
     #[cfg(target_arch = "wasm32")]
     pub fn run(&self) -> Result<Vec<u8>> {
-        Err(EngineError::Other("re-cooking a MaterialCraft material needs its command line, which the browser can't run".into()))
+        Err(EngineError::Other("re-cooking an ICASYS Materiales material needs its command line, which the browser can't run".into()))
     }
 }
 
@@ -389,7 +389,7 @@ impl Session {
             let LayerKind::Fill(mut fill) = s.doc.project.layer(id)?.kind.clone() else {
                 return Err(EngineError::Other(format!("layer {} is not a fill", id.0)));
             };
-            let link = fill.link.as_mut().ok_or_else(|| EngineError::Other(format!("layer {} is not a MaterialCraft material", id.0)))?;
+            let link = fill.link.as_mut().ok_or_else(|| EngineError::Other(format!("layer {} is not an ICASYS Materiales material", id.0)))?;
             for p in &mut link.params {
                 if let Some(cooked) = m.manifest.parameters.iter().find(|c| c.id == p.id) {
                     p.value = cooked.value.clone();

@@ -95,14 +95,14 @@ pub const CATALOG: &[Item] = &[
     it("Viewport", "Invert quick mask", "viewport.quickMask.invert", Some("Ctrl+Shift+I")),
     it("Help", "Documentation...", "ui.help.docs", None),
     it("Help", "Shortcuts list...", "ui.help.shortcuts", None),
-    it("Help", "Join the community (Discord)...", "ui.help.discord", None),
-    it("Help", "ArtCraft website...", "ui.help.website", None),
+    it("Help", "ICASYS Community...", "ui.help.discord", None),
+    it("Help", "ICASYS Website...", "ui.help.website", None),
     it("Help", "Report a bug...", "ui.help.bug", None),
     sep("Help"),
     it("Help", "Show log...", "ui.view.log", None),
     #[cfg(not(target_arch = "wasm32"))]
     it("Help", "Check for Updates...", "ui.help.checkForUpdates", None),
-    it("Help", "About TextureCraft...", "ui.about", None),
+    it("Help", "About ICASYS Texturas...", "ui.about", None),
 ];
 
 /// Ids the shell handles itself.
@@ -175,10 +175,10 @@ pub fn invoke(app: &mut TextureCraftApp, ctx: &egui::Context, id: &str) {
         "ui.about" => app.ui.windows.about = true,
         #[cfg(not(target_arch = "wasm32"))]
         "ui.help.checkForUpdates" => crate::updates_ui::request_check(app, ctx),
-        "ui.help.discord" => ctx.open_url(egui::OpenUrl::new_tab("https://discord.gg/artcraft")),
-        "ui.help.website" => ctx.open_url(egui::OpenUrl::new_tab("https://getartcraft.com/apps/texturecraft")),
-        "ui.help.docs" => ctx.open_url(egui::OpenUrl::new_tab("https://github.com/storytold/texturecraft#readme")),
-        "ui.help.bug" => ctx.open_url(egui::OpenUrl::new_tab("https://github.com/storytold/texturecraft/issues")),
+        "ui.help.discord" => ctx.open_url(egui::OpenUrl::new_tab("https://icasys.mx")),
+        "ui.help.website" => ctx.open_url(egui::OpenUrl::new_tab("https://icasys.mx")),
+        "ui.help.docs" => ctx.open_url(egui::OpenUrl::new_tab("https://github.com/arodrigosote/texturecraft#readme")),
+        "ui.help.bug" => ctx.open_url(egui::OpenUrl::new_tab("https://github.com/arodrigosote/texturecraft/issues")),
         _ => {
             if crate::windows::file_action(app, ctx, id) {
                 return;

@@ -82,7 +82,10 @@ pub use state::UiState;
 pub const UPDATE_APP: craft_update::App = craft_update::App {
     icon_png: Some(include_bytes!("../../../assets/app-icon/hicolor/128x128/apps/ai.storyteller.texturecraft.png")),
     accent: Some([0xc2, 0x67, 0x2b]),
-    ..craft_update::App::new("texturecraft", "TextureCraft", "3D texture painting", "storytold/texturecraft")
+    name: "ICASYS Texturas",
+    developer: "ICASYS",
+    repo: "arodrigosote/texturecraft",
+    ..craft_update::App::new("texturecraft", "ICASYS Texturas", "3D texture painting", "arodrigosote/texturecraft")
 };
 
 /// A texture set resize running on a worker thread (`Session::resize_task`).
@@ -104,7 +107,7 @@ pub const PAINTING_PAUSED: &str = i18n::n_("Painting is paused while a bake is s
 
 /// The browser build's notice when WebGPU is unavailable and wgpu fell back to WebGL2.
 pub const WEBGL_NOTICE: &str = i18n::n_(
-    "WebGPU isn't available in this browser, so TextureCraft runs on WebGL2: Rendering mode path traces on the CPU (slower) and large texture sets show at reduced resolution. A current Chrome, Edge or Safari has WebGPU.",
+    "WebGPU isn't available in this browser, so ICASYS Texturas runs on WebGL2: Rendering mode path traces on the CPU (slower) and large texture sets show at reduced resolution. A current Chrome, Edge or Safari has WebGPU.",
 );
 
 pub struct Toast {
@@ -359,7 +362,7 @@ impl TextureCraftApp {
                 false
             }
             Err(std::sync::mpsc::TryRecvError::Disconnected) => {
-                done.push((c.layer, c.values.clone(), Err(texturecraft_engine::EngineError::Other("the MaterialCraft cook stopped".into()))));
+                done.push((c.layer, c.values.clone(), Err(texturecraft_engine::EngineError::Other("the ICASYS Materiales cook stopped".into()))));
                 false
             }
         });

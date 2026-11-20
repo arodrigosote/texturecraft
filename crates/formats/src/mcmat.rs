@@ -20,7 +20,7 @@ const FORMAT: &str = "craft-material";
 const VERSION: u32 = 1;
 /// Largest entry read (maps are at most 8192² × 16 bits, compressed).
 const MAX_ENTRY: u64 = 512 << 20;
-const KIND: &str = "MaterialCraft material";
+const KIND: &str = "ICASYS Materiales material";
 
 #[derive(Clone, Debug, PartialEq, Deserialize)]
 #[serde(rename_all = "camelCase")]

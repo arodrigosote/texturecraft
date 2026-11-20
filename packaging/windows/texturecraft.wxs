@@ -14,34 +14,34 @@
 <?define MeshExtensions = glb;gltf;fbx;dae;usd;usda;usdc;usdz;abc;obj;ply;stl ?>
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Package
-      Name="TextureCraft"
-      Manufacturer="Learning Machines LLC"
+      Name="ICASYS Texturas"
+      Manufacturer="ICASYS"
       Version="$(var.Version)"
       UpgradeCode="7E670E60-BB22-4E6B-8749-DD3FD4CA8979"
       Scope="perMachine"
       Compressed="yes"
       Language="1033">
-    <SummaryInformation Description="TextureCraft 3D texture painter" Manufacturer="Learning Machines LLC" />
+    <SummaryInformation Description="ICASYS Texturas 3D texture painter" Manufacturer="ICASYS" />
     <!-- Same-version upgrades let successive pre-releases of one X.Y.Z replace each other
          (MSI versions are numeric, so 1.2.3-rc.1 and 1.2.3-rc.2 are both 1.2.3). -->
     <MajorUpgrade AllowSameVersionUpgrades="yes"
-        DowngradeErrorMessage="A newer version of TextureCraft is already installed." />
+        DowngradeErrorMessage="A newer version of ICASYS Texturas is already installed." />
     <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
 
     <!-- MSI caches this icon using its Id as the filename. Advertised shortcuts to an
          .exe need an .exe icon identifier (ICE50), even when the source is an ICO. -->
     <Icon Id="TextureCraftIcon.exe" SourceFile="$(var.IconPath)" />
     <Property Id="ARPPRODUCTICON" Value="TextureCraftIcon.exe" />
-    <Property Id="ARPURLINFOABOUT" Value="https://getartcraft.com/apps/texturecraft" />
-    <Property Id="ARPURLUPDATEINFO" Value="https://getartcraft.com/apps/texturecraft" />
-    <Property Id="ARPHELPLINK" Value="https://discord.gg/artcraft" />
+    <Property Id="ARPURLINFOABOUT" Value="https://icasys.mx" />
+    <Property Id="ARPURLUPDATEINFO" Value="https://icasys.mx" />
+    <Property Id="ARPHELPLINK" Value="https://icasys.mx" />
 
     <StandardDirectory Id="ProgramFiles6432Folder">
       <Directory Id="INSTALLFOLDER" Name="TextureCraft" />
     </StandardDirectory>
     <StandardDirectory Id="ProgramMenuFolder" />
 
-    <Feature Id="Main" Title="TextureCraft" Level="1">
+    <Feature Id="Main" Title="ICASYS Texturas" Level="1">
       <ComponentGroupRef Id="TextureCraftFiles" />
     </Feature>
   </Package>
@@ -50,13 +50,13 @@
     <ComponentGroup Id="TextureCraftFiles" Directory="INSTALLFOLDER">
       <Component Id="TextureCraftApp">
         <File Id="TextureCraftExe" Source="$(var.BinDir)\texturecraft.exe" KeyPath="yes">
-          <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="TextureCraft"
-              Description="TextureCraft 3D texture painter" WorkingDirectory="INSTALLFOLDER" Advertise="yes"
+          <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="ICASYS Texturas"
+              Description="ICASYS Texturas 3D texture painter" WorkingDirectory="INSTALLFOLDER" Advertise="yes"
               Icon="TextureCraftIcon.exe" IconIndex="0" />
         </File>
 
         <!-- .tcraft: TextureCraft's own project format; TextureCraft is its default app. -->
-        <ProgId Id="TextureCraft.Project" Description="TextureCraft Project" Icon="TextureCraftExe" IconIndex="0">
+        <ProgId Id="TextureCraft.Project" Description="ICASYS Texturas Project" Icon="TextureCraftExe" IconIndex="0">
           <Extension Id="tcraft" ContentType="application/x-texturecraft">
             <Verb Id="open" Command="Open" TargetFile="TextureCraftExe" Argument="&quot;%1&quot;" />
           </Extension>
@@ -70,7 +70,7 @@
         <?endforeach?>
 
         <!-- "Open with" app list and the Run dialog (Win+R "texturecraft"). -->
-        <RegistryValue Root="HKLM" Key="Software\Classes\Applications\texturecraft.exe" Name="FriendlyAppName" Value="TextureCraft" Type="string" />
+        <RegistryValue Root="HKLM" Key="Software\Classes\Applications\texturecraft.exe" Name="FriendlyAppName" Value="ICASYS Texturas" Type="string" />
         <RegistryValue Root="HKLM" Key="Software\Classes\Applications\texturecraft.exe\shell\open\command" Value="&quot;[#TextureCraftExe]&quot; &quot;%1&quot;" Type="string" />
         <RegistryValue Root="HKLM" Key="Software\Classes\Applications\texturecraft.exe\SupportedTypes" Name=".tcraft" Value="" Type="string" />
         <?foreach Ext in $(var.MeshExtensions)?>

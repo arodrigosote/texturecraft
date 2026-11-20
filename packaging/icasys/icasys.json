@@ -1,0 +1,29 @@
+{
+  "app": "texturecraft",
+  "name": "ICASYS Texturas",
+  "slug": "texturas",
+  "upstream_name": "TextureCraft",
+  "upstream_base": "34a196190fe2daa2f43017a0f32b254cca4836f2",
+  "owner": "arodrigosote",
+  "es_ui": true,
+  "deb_section": "graphics",
+  "cli": "texturecraft-cli",
+  "cli_project_ext": "tcraft",
+  "mcp": {
+    "headless": "mcp",
+    "attach": "mcp --bridge 9876",
+    "auth": "token",
+    "project": ""
+  },
+  "companions": [
+    {
+      "name": "ICASYS Materiales",
+      "id": "materialcraft",
+      "cli": "materialcraft-cli",
+      "mac_exe": "MaterialCraft",
+      "env_app": "MATERIALCRAFT",
+      "env_cli": "MATERIALCRAFT_CLI",
+      "why": "abrir y volver a calcular los materiales enlazados (.mcraft)"
+    }
+  ]
+}
